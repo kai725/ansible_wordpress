@@ -1,0 +1,31 @@
+---
+- name: update and install YUM packages
+  hosts: application
+  gather_facts: yes
+  become: yes
+  vars:
+    - packages: ['vim','tree','curl','wget','git']
+  tasks:
+    - name: Update DNF Packages, Install DNF Packages
+      block:
+        - name: Update DNF packages
+          dnf:
+            state: latest
+            name: '*'
+        - name: Install DNF packages
+          dnf:
+            state: latest
+            name: "{{ packages }}"
+      when: ansible_pkg_mgr == "dnf" 
+
+    - name: Update APT Packages, Install APT Packages
+      block:
+        - name: Update APT Packages
+          apt:
+            state: latest
+            name: '*'
+        - name: Install 
+          apt:
+            state: latest
+            name: "{{ packages }}"
+      when: ansible_pkg_mgr == "apt"

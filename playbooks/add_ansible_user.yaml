@@ -1,0 +1,19 @@
+---
+- name: Add ansible user
+  hosts: application
+  gather_facts: yes
+  tasks:
+    - name: Add ansible user, copy ssh-key
+      block:
+        - name: add ansible user 
+          user:
+            name: ansible
+            uid: 2000
+            group: wheel
+        - name: add SSH key
+          authorized_key:
+            user: ansible
+            state: present
+            key: "{{ lookup('file', '/home/ansible/.ssh/id_rsa.pub')}}"
+            
+      when: ansible_distribution == "CentOS"
