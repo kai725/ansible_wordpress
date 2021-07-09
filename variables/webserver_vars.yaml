@@ -1,0 +1,5 @@
+app_host: app_server1
+facts: yes
+
+# Task "Install "
+webserver_packages: ["httpd", "php", "php-mysqlnd", "mysql"]
