@@ -1,2 +1,16 @@
 database_host: db_server1
 facts: yes
+
+# Task "INsatll MariaDB and python3-pymysql" variables
+database_packages: ["mariadb-server", "python3-pymysql"]
+
+# Task "set root password"
+root_password:  secrete123password 
+new_root_password: testpassword123
+
+# Task "Create Wordpress Database"
+wp_db: wpdb
+
+#Task ""
+wp_user: wpuser
+wpuser_password: verysecurepassword123
